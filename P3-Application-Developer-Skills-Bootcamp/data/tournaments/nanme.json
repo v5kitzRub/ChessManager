@@ -1,0 +1,125 @@
+{
+  "name": "nanme",
+  "venue": "ven",
+  "dates": {
+    "from": "01-01-2026",
+    "to": "15-01-2026"
+  },
+  "number_of_rounds": 4,
+  "current_round": null,
+  "completed": true,
+  "players": [
+    "NG39713",
+    "JW63361",
+    "QZ98880",
+    "QQ22510",
+    "QF01697",
+    "BR95594"
+  ],
+  "rounds": [
+    [
+      {
+        "players": [
+          "JW63361",
+          "QZ98880"
+        ],
+        "completed": true,
+        "winner": "JW63361"
+      },
+      {
+        "players": [
+          "BR95594",
+          "QQ22510"
+        ],
+        "completed": true,
+        "winner": "QQ22510"
+      },
+      {
+        "players": [
+          "NG39713",
+          "QF01697"
+        ],
+        "completed": true,
+        "winner": "NG39713"
+      }
+    ],
+    [
+      {
+        "players": [
+          "JW63361",
+          "NG39713"
+        ],
+        "completed": true,
+        "winner": "JW63361"
+      },
+      {
+        "players": [
+          "QQ22510",
+          "QZ98880"
+        ],
+        "completed": true,
+        "winner": "QZ98880"
+      },
+      {
+        "players": [
+          "QF01697",
+          "BR95594"
+        ],
+        "completed": true,
+        "winner": "BR95594"
+      }
+    ],
+    [
+      {
+        "players": [
+          "JW63361",
+          "BR95594"
+        ],
+        "completed": true,
+        "winner": "JW63361"
+      },
+      {
+        "players": [
+          "QZ98880",
+          "NG39713"
+        ],
+        "completed": true,
+        "winner": "NG39713"
+      },
+      {
+        "players": [
+          "QQ22510",
+          "QF01697"
+        ],
+        "completed": true,
+        "winner": "QQ22510"
+      }
+    ],
+    [
+      {
+        "players": [
+          "JW63361",
+          "QQ22510"
+        ],
+        "completed": true,
+        "winner": "QQ22510"
+      },
+      {
+        "players": [
+          "NG39713",
+          "BR95594"
+        ],
+        "completed": true,
+        "winner": "NG39713"
+      },
+      {
+        "players": [
+          "QZ98880",
+          "QF01697"
+        ],
+        "completed": true,
+        "winner": "QZ98880"
+      }
+    ]
+  ]
+}

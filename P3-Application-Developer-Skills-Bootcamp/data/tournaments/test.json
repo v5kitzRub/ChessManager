@@ -1,0 +1,13 @@
+{
+  "name": "test",
+  "venue": "test",
+  "dates": {
+    "from": "01-01-2026",
+    "to": "15-01-2026"
+  },
+  "number_of_rounds": 4,
+  "current_round": null,
+  "completed": false,
+  "players": [],
+  "rounds": []
+}

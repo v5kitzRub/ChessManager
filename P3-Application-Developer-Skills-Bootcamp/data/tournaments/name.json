@@ -1,0 +1,58 @@
+{
+  "name": "name",
+  "venue": "venu",
+  "dates": {
+    "from": "01-01-2026",
+    "to": "15-01-2026"
+  },
+  "number_of_rounds": 4,
+  "current_round": null,
+  "completed": true,
+  "players": [
+    "NG39713",
+    "JW63361",
+    "QZ98880"
+  ],
+  "rounds": [
+    [
+      {
+        "players": [
+          "NG39713",
+          "QZ98880"
+        ],
+        "completed": true,
+        "winner": "NG39713"
+      }
+    ],
+    [
+      {
+        "players": [
+          "NG39713",
+          "JW63361"
+        ],
+        "completed": true,
+        "winner": null
+      }
+    ],
+    [
+      {
+        "players": [
+          "NG39713",
+          "JW63361"
+        ],
+        "completed": true,
+        "winner": "NG39713"
+      }
+    ],
+    [
+      {
+        "players": [
+          "NG39713",
+          "JW63361"
+        ],
+        "completed": true,
+        "winner": "NG39713"
+      }
+    ]
+  ]
+}
