@@ -1,6 +1,7 @@
 from ..base_screen import BaseScreen
 from commands.tournaments import TournamentListCmd
 from commands import ExitCmd, NoopCmd
+from models import build_player_index
 
 
 class TournamentView(BaseScreen):
@@ -13,7 +14,15 @@ class TournamentView(BaseScreen):
         print("##", t.name)
         print("Venue:", t.venue)
         print("Dates:", t.date_from, "-", t.date_to)
-        print("Players registered:", len(t.players))
+        print(f"Players registered ({len(t.players)}):")
+        if not t.players:
+            print(" - No players registered yet.")
+        else:
+            index = build_player_index()
+            for chess_id in t.players:
+                player = index.get(chess_id)
+                label = player.name if player else "Unknown player"
+                print(f" - {label} ({chess_id})")
         print("Rounds:", f"{t.current_round or 0}/{t.number_of_rounds}")
         if t.completed:
             print("Status: COMPLETED")

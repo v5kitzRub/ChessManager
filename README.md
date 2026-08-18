@@ -76,7 +76,7 @@ To set up ChessManager, follow these steps:
 1. create/set-up project venv 
 2. git clone project repo
 3. `pip install -r requirements.txt`
-4. in terminal to run app `manage_tournaments.py` 
+4. in terminal to run app `python manage_tournaments.py` 
 5. in terminal to run flake8 linter `flake8 --format=html --htmldir=flake8_report`
 
 ## Key Features
