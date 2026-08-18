@@ -71,7 +71,7 @@ The main application is an infinite loop and stops when a context has the attrib
 - Space: 
     - project is about 40-42MB
 
-### 📦 Download + Install + flake9 reports
+### 📦 Download + Install + flake8 reports
 To set up ChessManager, follow these steps:
 1. create/set-up project venv 
 2. git clone project repo
