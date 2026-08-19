@@ -1,12 +1,16 @@
 # (Updated) Starter code - OpenClassrooms WPS | P3
 
-This repository contains the work that has been done so far on the chess tournament program.
+This repository contains the work completed on chess club and tournament management program
+
+Managements are independent front ends for same club/player data:
+- `manage_clubs.py`
+- `manage_tournaments.py`
 
 ### Data files
 
 There are data files provided:
-- JSON files for the chess clubs of Springfield and Cornville
-- JSON files for two tournaments: one completed, and one in progress
+- JSON files for the chess clubs of Springfield and Cornville (`data/clubs/`)
+- JSON files for two tournaments: one completed, and one in progress (`data/tournaments/`)
 
 ### Utils
 
@@ -14,8 +18,8 @@ This package contains helper functions for read/write list of tournament .json
 
 ### Models
 
-This package contains the models already defined by the application:
-* `Player` is a class that represents a chess player
+This package contains the models used by the application:
+* `Player` is a class that represents a chess player containing `name`,`email`,`chess_id`, and `birthday`
 * `Club` is a class that represents a chess club (including `Players`)
 * `ClubManager` is a manager class that allows to manage all clubs (and create new ones)
 * `Tournament` is a class that represents the Tournament event
@@ -40,8 +44,7 @@ Each screen returns a Command instance (= the action to be carried out).
 ### Commands
 
 This package contains "commands" - instances of classes that are used to perform operations from the program.
-Commands follow a *template pattern*. They **must** define the `execute` method.
-When executed, a command returns a context.
+They **must** define the `execute` method. When executed, a command returns a context.
 
 * `ListTournaments` recieved oredered tournaments with progress state, 
 * `CreateTournament` recieves tournament information, created tournament add to tournament manager list, return context screen to tournament specific view
@@ -52,9 +55,7 @@ When executed, a command returns a context.
 
 ### Main application
 
-The main application is controlled by `manage_clubs.py`. Based on the current Context instance, it instantiates the screens and runs them. The command returned by the screen is then executed to obtain the next context.
-
-* Updated Tournament application is controlled by `Manage_tournaments.py`
+The main application is controlled by `manage_clubs.py` for Club Management or `manage_tournaments.py` for Tournament Management. Based on the current Context instance, it instantiates the screens and runs them. The command returned by the screen is then executed to obtain the next context.
 
 The main application is an infinite loop and stops when a context has the attribute `run` set to False.
 

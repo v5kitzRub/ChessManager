@@ -7,9 +7,6 @@ class Player:
     DATE_FORMAT = "%d-%m-%Y"
 
     def __init__(self, name, email, chess_id, birthday):
-        if not name:
-            raise ValueError("Player name is required!")
-
         self.name = name
         self.email = email
         self.chess_id = chess_id
@@ -38,6 +35,45 @@ class Player:
             other.birthdate,
         )
 
+    # name get/set
+    @property
+    def name(self):
+        """Property to get the name"""
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        """sets the name does not allow empty"""
+        if not value or not value.strip():
+            raise ValueError("player Name is Required")
+        self._name = value
+
+    # email get/set
+    @property
+    def email(self):
+        """Property to get email"""
+        return self._email
+
+    @email.setter
+    def email(self, value):
+        """sets email does not allow empty"""
+        if not value or not value.strip():
+            raise ValueError("player Email is Required")
+        self._email = value
+
+    # chessid get/set
+    def chess_id(self):
+        """Property to get user chessid"""
+        return self._chess_id
+
+    @chess_id.setter
+    def chess_id(self, value):
+        """sets user chessid"""
+        if not value or not value.strip():
+            raise ValueError("player Chess ID is Required")
+        self._chess_id = value
+
+    # birthday get/set
     @property
     def birthday(self):
         """Property to get the birthday (string) from the birthdate (datetime)"""
@@ -46,6 +82,8 @@ class Player:
     @birthday.setter
     def birthday(self, value):
         """Sets the birthdate (datetime) from a string"""
+        if not value or not value.strip():
+            raise ValueError("player Birthday is Required")
         self.birthdate = datetime.strptime(value, self.DATE_FORMAT)
 
     def serialize(self):

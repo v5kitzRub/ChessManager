@@ -13,7 +13,7 @@ class PlayerEdit(BaseScreen):
     def get_command(self):
         """Goes through the attributes and gets them from the user"""
         attrs = [
-            ("name", "Player name", self.input_string),
+            ("name", "Player name", lambda **kw: self.input_string(empty=True, **kw)),
             ("email", "Email address", self.input_email),
             ("chess_id", "Chess ID", self.input_chess_id),
             ("birthday", "Birthday", self.input_birthday),
