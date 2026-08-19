@@ -5,12 +5,15 @@ class Round:
     """ round obj is list of matchup instances """
 
     def __init__(self, matches=None):
+        # list of current matchup obj for current round
         self.matches = matches or []
 
     def __iter__(self):
+        # loop matches from round
         return iter(self.matches)
 
     def __len__(self):
+        # len(round) returns number of matchups per round
         return len(self.matches)
 
     @property

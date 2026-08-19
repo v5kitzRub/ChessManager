@@ -26,12 +26,16 @@ class TournamentApp:
     }
 
     def __init__(self):
+        # load tournaments, sets start screen
         command = TournamentListCmd()
+        # returns context screen
         self.context = command()
 
     # program loop
     def run(self):
+        # while current context screen = true, loop
         while self.context.run:
+            # match current screen contexrt with screen class
             screen = self.SCREENS[self.context.screen]
             try:
                 command = screen(**self.context.kwargs).run()

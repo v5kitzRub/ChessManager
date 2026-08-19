@@ -6,6 +6,7 @@ from commands.tournaments import TournamentAdvanceRoundCmd
 class TournamentAdvanceRound(BaseScreen):
     """ display screen when advancing to next round or starting tournament """
     def __init__(self, tournament):
+        # current tournament instance
         self.tournament = tournament
 
     def display(self):

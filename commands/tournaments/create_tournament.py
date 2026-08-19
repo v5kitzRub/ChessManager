@@ -13,7 +13,9 @@ class TournamentCreateCmd(BaseCommand):
         self.number_of_rounds = number_of_rounds
 
     def execute(self):
+        # loads tournaments.json list
         manager = TournamentManager()
+        # create tournament and add to list with other tournaments
         tournament = manager.create(
             name=self.name,
             venue=self.venue,
@@ -21,4 +23,5 @@ class TournamentCreateCmd(BaseCommand):
             date_to=self.date_to,
             number_of_rounds=self.number_of_rounds,
         )
+        # return to new tournament view
         return Context("tournament-view", tournament=tournament)

@@ -7,7 +7,9 @@ from commands.tournaments import TournamentRegisterPlayerCmd
 class TournamentRegisterPlayer(BaseScreen):
     """ screen to register an existing club player into tournament by search or list"""
     def __init__(self, tournament):
+        # current tournament instance
         self.tournament = tournament
+        # build dict map for each player by chess id in clubs
         self.player_index = build_player_index()
 
     def display(self):
@@ -47,30 +49,36 @@ class TournamentRegisterPlayer(BaseScreen):
                 print("Invalid option.")
 
     def _available_players(self):
-        """ all club players not yet registered in this tournament sorted by name."""
+        """ all club players not yet registered in this tournament sorted by name """
         players = [
             player
             for chess_id, player in self.player_index.items()
             if chess_id not in self.tournament.players
         ]
+        # return sorted alphabetical list of players
         return sorted(players, key=lambda p: p.name.lower())
 
     def _search_by_name(self):
+        # prompt for substring
         query = self.input_string(prompt="Name contains", empty=True)
+        # caseinsensitive matches for input string mathced with available players
         matches = [p for p in self._available_players() if query.lower() in p.name.lower()]
         if not matches:
-            print("No available players found matching that name.")
+            print("No available players found matching that name")
             return None
+        # return match
         return self._select_player(matches)
 
     def _search_by_chess_id(self):
+        # prompt for player chessid
         chess_id = self.input_chess_id(prompt="Player Chess ID")
         if chess_id not in self.player_index:
-            print("No player with that Chess ID was found in any club.")
+            print("No player with that Chess ID was found in any club")
             return None
         if chess_id in self.tournament.players:
-            print("That player is already registered in this tournament.")
+            print("That player is already registered in this tournament")
             return None
+        # register player by chessid
         return TournamentRegisterPlayerCmd(self.tournament, chess_id)
 
     def _select_player(self, players):
@@ -79,6 +87,7 @@ class TournamentRegisterPlayer(BaseScreen):
             print("No available players to register.")
             return None
 
+        # loop each player and print index with name + chessid
         for idx, player in enumerate(players, 1):
             print(idx, player.name, f"({player.chess_id})")
         print("Enter a number to register that player or 'B' to go back.")
@@ -87,7 +96,9 @@ class TournamentRegisterPlayer(BaseScreen):
             value = self.input_string()
             if value.upper() == "B":
                 return None
+            # input isdigit + positive int + within list range
             if value.isdigit() and 1 <= int(value) <= len(players):
                 player = players[int(value) - 1]
+                # register player by chessid
                 return TournamentRegisterPlayerCmd(self.tournament, player.chess_id)
             print("Invalid selection.")

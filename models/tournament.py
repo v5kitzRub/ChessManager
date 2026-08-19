@@ -35,6 +35,7 @@ class Tournament:
         self.filepath = filepath
 
     def __str__(self):
+        # format for return
         return f"<Tournament: {self.name}>"
 
     # -------- tournament property
@@ -47,22 +48,30 @@ class Tournament:
         """The Round currently being played, or None if not started yet."""
         if not self.rounds:
             return None
+        # most recent appended round is current round in progress
         return self.rounds[-1]
 
     def points(self):
         """Return a dict mapping chess_id -> total tournament points."""
+        # each players total start 0
         totals = {player: 0 for player in self.players}
+        # loop each round
         for round_ in self.rounds:
+            # loop each matchup in round
             for match in round_:
+                # skip not completed
                 if not match.completed:
                     continue
+                # add each players result to started total
                 totals[match.player1] += match.points_for(match.player1)
                 totals[match.player2] += match.points_for(match.player2)
         return totals
 
     def ranked_players(self):
         """Players sorted by points descending, for report display."""
+        # current point totals for each player
         totals = self.points()
+        # sort players list by highest total points
         return sorted(self.players, key=lambda p: totals[p], reverse=True)
 
     # -------- register player
@@ -72,7 +81,9 @@ class Tournament:
         if chess_id in self.players:
             raise ValueError(f"{chess_id}: is already registered for this tournament")
 
+        # append players chess id to players list
         self.players.append(chess_id)
+        # update current tournament.json
         self.save()
 
     # -------- rounds process
@@ -83,23 +94,30 @@ class Tournament:
         if len(self.players) < 2:
             raise RuntimeError("At least two players must be registered to start.")
 
+        # random suffle + pair registered players for round 1
         pairs = pairing.generate_first_round_pairs(self.players)
+        # add pairs to match obj and append new round
         self._add_round(pairs)
+        # current round
         self.current_round = 1
+        # update current tournament.json
         self.save()
 
     def record_result(self, match, winner=None):
         """Set the result for matchup"""
+        # matchups recorded must be in curr round
         if self.current_round_obj is None or match not in self.current_round_obj:
             raise RuntimeError("That match is not part of the current round.")
 
+        # store matchup result
         match.set_result(winner)
+        # update current tournament.json
         self.save()
 
     def advance_round(self):
         """
         Close out the current round and either start the next one or,
-        if this was the last round, mark the tournament as completed.
+        if this was the last round mark the tournament as completed.
         """
         current = self.current_round_obj
         if current is None:
@@ -107,20 +125,29 @@ class Tournament:
         if not current.is_complete:
             raise RuntimeError("All matches in the current round must have a result first.")
 
+        # reached end of rounds
         if self.current_round >= self.number_of_rounds:
             self.completed = True
             self.current_round = None
+            # update current tournament.json
             self.save()
             return
 
+        # set pairs that have already played previous rounds
         already_played = pairing.match_history(self.rounds)
+        # from ranked list + previous rounds generate next round pairs
         pairs = pairing.generate_next_round_pairs(self.players, self.points(), already_played)
+        # add pairs to match obj and append new round
         self._add_round(pairs)
+        # increment round counter
         self.current_round += 1
+        # update current tournamne.json
         self.save()
 
     def _add_round(self, pairs):
+        # set matchup pairs (tuple) as match obj
         matches = [Match(p1, p2) for p1, p2 in pairs]
+        # append matchups into rounds for history
         self.rounds.append(Round(matches))
 
     # -------- load/ save serialized into json file
@@ -138,12 +165,15 @@ class Tournament:
         }
 
     def save(self):
+        # with serialize data write to .json to update
         write_json(self.filepath, self.serialize())
 
     @classmethod
     def load(cls, filepath):
         """ rebuild from .json """
+        # read .json from filepath
         data = read_json(filepath)
+        # reconstuct tournament instance with .json data
         return cls(
             name=data["name"],
             venue=data["venue"],

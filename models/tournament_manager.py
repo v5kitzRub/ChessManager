@@ -10,17 +10,23 @@ class TournamentManager:
     Loads tournament .json file from 'data_folder'
     Mirrors models.club_manager.ClubManager to create
     """
-    def __init__(self, data_folder="P3-Application-Developer-Skills-Bootcamp/data/tournaments"):
+    def __init__(self, data_folder="data/tournaments"):
+        # path for tournaments.json
         self.data_folder = Path(data_folder)
+        # append loaded tournaments instances
         self.tournaments = []
+        # loop each .json in filepath ignore non.json
         for filepath in iter_json_files(self.data_folder):
             try:
+                # build tournament instance from .json
                 self.tournaments.append(Tournament.load(filepath))
             except (json.JSONDecodeError, KeyError):
                 print(filepath, "is not a valid tournament file.")
 
     def create(self, name, venue, date_from, date_to, number_of_rounds=4):
+        # build filepath for created tournament.json
         filepath = self.data_folder / (name.replace(" ", "") + ".json")
+        # create new tournament instance
         tournament = Tournament(
             name=name,
             venue=venue,
@@ -29,7 +35,9 @@ class TournamentManager:
             number_of_rounds=number_of_rounds,
             filepath=filepath,
         )
+        # update current tournament.json
         tournament.save()
+        # append created trournament to loaded tournament instances
         self.tournaments.append(tournament)
         return tournament
 

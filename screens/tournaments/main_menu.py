@@ -5,6 +5,7 @@ from commands import ExitCmd, NoopCmd
 class TournamentMainMenu(BaseScreen):
     """ display list of tournaments sorted by descending start date or no tournaments """
     def __init__(self, tournaments):
+        # list of tournaments
         self.tournaments = tournaments
 
     def display(self):

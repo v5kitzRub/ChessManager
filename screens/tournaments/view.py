@@ -7,6 +7,7 @@ from models import build_player_index
 class TournamentView(BaseScreen):
     """ main screen for a single tournament """
     def __init__(self, tournament):
+        # current tournament instance
         self.tournament = tournament
 
     def display(self):
