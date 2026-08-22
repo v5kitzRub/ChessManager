@@ -62,6 +62,7 @@ class Player:
         self._email = value
 
     # chessid get/set
+    @property
     def chess_id(self):
         """Property to get user chessid"""
         return self._chess_id
